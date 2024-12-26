@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Music - MusicVideoHub{% endblock %}
+
+{% block content %}
+    <main>
+        <section class="page-header">
+            <h1 class="animated-text">Create New Music</h1>
+            <a href="{% url 'tracks:list' %}" class="btn"><i class="fas fa-arrow-left"></i> Back to List</a>
+        </section>
+
+        <section class="music-form glass-effect">
+            <form action="#" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="artist">Artist</label>
+                    <input type="text" id="artist" name="artist" required>
+                </div>
+                <div class="form-group">
+                    <label for="album">Album</label>
+                    <input type="text" id="album" name="album">
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <input type="text" id="genre" name="genre">
+                </div>
+                <div class="form-group">
+                    <label for="release_date">Release Date</label>
+                    <input type="date" id="release_date" name="release_date">
+                </div>
+                <div class="form-group">
+                    <label for="cover_image">Cover Image</label>
+                    <input type="file" id="cover_image" name="cover_image" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="audio_file">Audio File</label>
+                    <input type="file" id="audio_file" name="audio_file" accept="audio/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Music</button>
+            </form>
+        </section>
+    </main>
+{% endblock %}
