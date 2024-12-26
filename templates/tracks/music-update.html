@@ -13,23 +13,23 @@
             <form action="#" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" id="title" name="title" value="Awesome Song" required>
+                    <input type="text" id="title" name="title" value="{{ track.title}}" required>
                 </div>
                 <div class="form-group">
                     <label for="artist">Artist</label>
-                    <input type="text" id="artist" name="artist" value="Amazing Artist" required>
+                    <input type="text" id="artist" name="artist" value="{{ track.artist }}" required>
                 </div>
                 <div class="form-group">
                     <label for="album">Album</label>
-                    <input type="text" id="album" name="album" value="Incredible Sounds">
+                    <input type="text" id="album" name="album" value="{{ track.album }}">
                 </div>
                 <div class="form-group">
                     <label for="genre">Genre</label>
-                    <input type="text" id="genre" name="genre" value="Pop">
+                    <input type="text" id="genre" name="genre" value="{{ track.genre }}">
                 </div>
                 <div class="form-group">
                     <label for="release_date">Release Date</label>
-                    <input type="date" id="release_date" name="release_date" value="2023-06-15">
+                    <input type="date" id="release_date" name="release_date" value="{{ release_date }}">
                 </div>
                 <div class="form-group">
                     <label for="cover_image">Cover Image</label>
