@@ -21,8 +21,9 @@
             </div>
             <p class="warning">This action cannot be undone.</p>
             <div class="action-buttons">
-                <a href="{% url 'track:list' %}" class="btn btn-secondary">Cancel</a>
-                <form action="#" method="POST" style="display: inline;">
+                <a href="{% url 'tracks:list' %}" class="btn btn-secondary">Cancel</a>
+                <form method="POST" style="display: inline;">
+                    {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>

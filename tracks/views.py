@@ -16,22 +16,24 @@ def music_create(request):
         title = request.POST.get('title')
         artist = request.POST.get('artist')
         album = request.POST.get('album')
+        genre = request.POST.get('genre')
         release_date = request.POST.get('release_date')
         cover_image = request.FILES.get('cover_image')
         audio_file = request.FILES.get('audio_file')
 
-        if title and artist and album and release_date and cover_image and audio_file:
+        if title and artist and album and genre and release_date and cover_image and audio_file:
             Track.objects.create(
                 title=title,
                 artist=artist,
                 album=album,
+                genre = genre,
                 release_date=release_date,
                 cover_image=cover_image,
                 audio_file=audio_file
             )
             return redirect('tracks:list')
 
-    return render(request, 'tracks/music-create.html')
+    return render(request, 'tracks/music-form.html')
 
 
 def music_detail(request, pk):
@@ -41,8 +43,11 @@ def music_detail(request, pk):
 
 def music_delete(request, pk):
     track = get_object_or_404(Track, pk=pk)
-    track.delete()
-    return redirect('tracks:list')
+    if request.method == 'POST':
+        track.delete()
+        return redirect('tracks:list')
+    ctx = {'track': track}
+    return render(request, 'tracks/music-delete-confirm.html', ctx)
 
 def music_update(request, pk):
     track = get_object_or_404(Track, pk=pk)
@@ -50,19 +55,24 @@ def music_update(request, pk):
         title = request.POST.get('title')
         artist = request.POST.get('artist')
         album = request.POST.get('album')
+        genre = request.POST.get('genre')
         release_date = request.POST.get('release_date')
         cover_image = request.FILES.get('cover_image')
         audio_file = request.FILES.get('audio_file')
 
-        if title and artist and album and release_date and cover_image and audio_file:
+        if title and artist and album and genre and release_date:
             track.title = title
             track.artist = artist
             track.album = album
+            track.genre = genre
             track.release_date = release_date
-            track.cover_image = cover_image
-            track.audio_file = audio_file
+            if cover_image:
+                track.cover_image = cover_image
+            if audio_file:
+                track.audio_file = audio_file
+
             track.save()
 
             return redirect(track.get_detail_url())
     ctx = {'track': track }
-    return render(request, 'tracks/music-create.html', ctx)
+    return render(request, 'tracks/music-form.html', ctx)
